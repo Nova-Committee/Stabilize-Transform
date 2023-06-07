@@ -1,0 +1,21 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "committee.nova.stntr.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "stntr.refmap.json",
+  "mixins": [
+    "MixinAbstractPiglin",
+    "MixinHoglin",
+    "MixinZoglin",
+    "MixinZombieVillager",
+    "MixinZombifiedPiglin"
+  ],
+  "client": [
+    "client.MixinLivingRenderer",
+    "client.MixinPiglinRenderer"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
