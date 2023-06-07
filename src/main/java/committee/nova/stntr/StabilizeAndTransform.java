@@ -80,6 +80,7 @@ public class StabilizeAndTransform {
             final IEntityStabilizable s = (IEntityStabilizable) e;
             if (!s.isImmuneToConversion() && s.canStabilize(player, stack)) {
                 s.setImmuneToConversion(true);
+                l.playSound(stack.getEatingSound(), 1.0F, 1.0F);
                 if (shouldConsume) stack.shrink(1);
                 return;
             }
@@ -92,7 +93,8 @@ public class StabilizeAndTransform {
                 l.removeEffect(Effects.WEAKNESS);
                 l.addEffect(new EffectInstance(Effects.DAMAGE_BOOST, conversionTime, Math.min(l.level.getDifficulty().getId() - 1, 0)));
                 if (!e.level.isClientSide)
-                    NetworkHandler.INSTANCE.send(PacketDistributor.DIMENSION.with(() -> e.level.dimension()), new TransformationSyncMsg(e.getId(), true, true));
+                    NetworkHandler.INSTANCE.send(PacketDistributor.DIMENSION.with(() -> e.level.dimension()),
+                            new TransformationSyncMsg(e.getId(), true, true));
             }
         }
     }
